@@ -1,0 +1,19 @@
+
+.container{
+    padding: 40px;
+}
+ 
+h2{
+
+    font-size: 30px;
+
+    color: #003366;
+
+    text-transform: uppercase;
+}
+table{
+    margin-top: 10px;
+}
+thead{
+    background: #ddd;
+}
