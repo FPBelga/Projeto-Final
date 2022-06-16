@@ -3,17 +3,17 @@ const Professor = require('../model/Professor');
 const serviceProfessor = require('../service/servicoProfessor');
 
 module.exports = class ProfessorController {
-    
+
     async obterTodos(req, res) {
         try {
             let professores = serviceProfessor.obterTodos();
             return res.json(professores);
         } catch (error) {
             console.log(error);
-            return res.json({ mensagem:error.message })
+            return res.json({ mensagem: error.message })
         }
     }
-    
+
     async obterPorId(req, res) {
         try {
             var id = req.params.id;
@@ -23,23 +23,24 @@ module.exports = class ProfessorController {
 
         } catch (error) {
             console.log(error);
-            return res.json({ mensagem:error.message })
+            return res.json({ mensagem: error.message })
         }
     }
 
     async cadastrar(req, res) {
-        try {           
+        try {
             let professor = serviceProfessor.cadastrar(req.body);
             return res.json(professor);
-            
+
         } catch (error) {
             console.log(error);
-            return res.json({ mensagem:error.message })
+            return res.json({ mensagem: error.message })
         }
     }
 
     async atualizar(req, res) {
         try {
+            console.log(req.body);
             var id = req.params.id;
             var professor = req.body || {};
 
@@ -50,7 +51,7 @@ module.exports = class ProfessorController {
 
         } catch (error) {
             console.log(error);
-            return res.json({ mensagem:error.message })
+            return res.json({ mensagem: error.message })
         }
     }
 
@@ -62,7 +63,7 @@ module.exports = class ProfessorController {
 
         } catch (error) {
             console.log(error);
-            return res.json({ mensagem:error.message })
+            return res.json({ mensagem: error.message })
         }
     }
 }

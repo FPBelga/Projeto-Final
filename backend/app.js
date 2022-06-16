@@ -13,4 +13,5 @@ app.get('/', (req, res) => {
     res.send("Api de controle de listagem de professores está em funcionamento!");
 });
 
+console.log('Rodar o backend com o comando -> "nodemon app.js"');
 app.listen(porta, () => console.log(`Api rodando na porta ${porta}`));
