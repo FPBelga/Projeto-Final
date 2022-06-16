@@ -22,7 +22,6 @@ btnAdicionar.addEventListener('click', () => {
     modoEdicao = false;
     atualizartextoModal(modoEdicao);
 });
-
 form.btnSalvar.addEventListener('click', () => {
     // Aqui preciso verificar se os campos foram preenchidos
     if (!form.nome.value || !form.email.value || !form.salario.value || !form.dataAdmissao.value) {
@@ -41,7 +40,6 @@ form.btnSalvar.addEventListener('click', () => {
         editarProfessorAPI(professor):
         cadastrarProfessorAPI(professor);
 });
-
 function cadastrarProfessorAPI(professor) {
     fetch("http://localhost:3000/professores", {
         headers: {
@@ -62,7 +60,6 @@ function cadastrarProfessorAPI(professor) {
             toast("Algo deu errado. Tente cadastrar novamente.")
         })
 };
-
 function editarProfessorAPI(professor) {
     fetch("http://localhost:3000/professores/" + professor.id, {
         headers: {
@@ -77,34 +74,24 @@ function editarProfessorAPI(professor) {
             toast("Dados atualizados, com sucesso!");
             limparCampos();
             atualizarProfessorNaLista(response);
-//            obterProfessoresDaAPI();
         })
         .catch(erro => { //se não funcionar
             toast("Erro na atualizaçao!")
         })
-
 };
-
 function deletarProfessorAPI(professor) {
-
     fetch("http://localhost:3000/professores/" + professor.id, {
         method: "DELETE",
     })
         .then(response => {
-
             toast("Professor " + professor.nome + " foi deletado!")
             obterProfessoresDaAPI();
-
         })
         .catch(erro => {
-
             toast("Erro na hora de deletar!")
-
         })
 };
-
 function obterProfessoresDaAPI() {
-
     fetch("http://localhost:3000/professores")
         .then(response => response.json())
         .then(response => {
@@ -121,7 +108,6 @@ function atualizarProfessorNaLista(professor){
     listaProfessores.splice(indice, 1, professor);
     preencherTabela(listaProfessores);
 }
-
 function preencherTabela(professores) {
     tbody.textContent = ""; //Limpa a tabela
     professores.map(professor => {
@@ -133,8 +119,8 @@ function preencherTabela(professores) {
         var tdSalario = document.createElement("td");
         var tdDataAdmissao = document.createElement("td");
         var tdDataCadastro = document.createElement("td");
-        var tdBtnExcluir = document.createElement("button");
         var tdBtnEditar = document.createElement("button");
+        var tdBtnExcluir = document.createElement("button");
 
         th.textContent = professor.id;
         th.setAttribute("scope", "row");
@@ -143,15 +129,7 @@ function preencherTabela(professores) {
         tdSalario.textContent = aplicarMascaraMoeda(parseInt(professor.salario));
         tdDataAdmissao.textContent = aplicarMascaraEmDataIso(professor.dataAdmissao);
         tdDataCadastro.textContent = aplicarMascaraEmDataIso(professor.dataCadastro);
-        
-        // Cria o botão de Deletar dinamicamente
-        tdBtnExcluir.style.margin = "5px 10px 5px 5px";
-        tdBtnExcluir.setAttribute("type", "button");
-        tdBtnExcluir.setAttribute("class", "btn btn-outline-danger");
-        tdBtnExcluir.innerHTML = 'Deletar';
-        tdBtnExcluir.onclick = function () {
-            deletarProfessorAPI(professor);
-        };
+   
         // Cria o botão de editar dinamicamente
         tdBtnEditar.setAttribute("type", "button");
         tdBtnEditar.setAttribute("class", "btn btn-outline-primary");
@@ -162,6 +140,14 @@ function preencherTabela(professores) {
             preencherCampos(professor)
             modoEdicao = true;
             atualizartextoModal(modoEdicao);
+        };
+        // Cria o botão de Deletar dinamicamente
+        tdBtnExcluir.style.margin = "5px 10px 5px 5px";
+        tdBtnExcluir.setAttribute("type", "button");
+        tdBtnExcluir.setAttribute("class", "btn btn-outline-danger");
+        tdBtnExcluir.innerHTML = 'Deletar';
+        tdBtnExcluir.onclick = function () {
+            deletarProfessorAPI(professor);
         };
 
         tr.appendChild(th);
@@ -178,7 +164,6 @@ function preencherTabela(professores) {
 };
 
 function limparCampos() {
-    
     form.nome.value = "";
     form.email.value = "";
     form.salario.value = "";
@@ -187,7 +172,6 @@ function limparCampos() {
 }
 
 function preencherCampos(professor) {
-
     form.id.value = professor.id;
     form.nome.value = professor.nome;
     form.email.value = professor.email;
@@ -197,7 +181,6 @@ function preencherCampos(professor) {
 }
 
 function atualizartextoModal(modoEdicao) {
-
     (modoEdicao) ?
         form.titulo.textContent = "Editar Professores" :
         form.titulo.textContent = "Cadastrar Professores"
@@ -209,6 +192,5 @@ function toast(message) {
         body: message,
     }).show();
 }
-
 obterProfessoresDaAPI();
 limparCampos();
