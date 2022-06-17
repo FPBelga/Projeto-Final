@@ -156,8 +156,8 @@ function preencherTabela(professores) {
         tr.appendChild(tdSalario);
         tr.appendChild(tdDataAdmissao);
         tr.appendChild(tdDataCadastro);
-        div.appendChild(tdBtnExcluir);
         div.appendChild(tdBtnEditar);
+        div.appendChild(tdBtnExcluir);
         tr.appendChild(div);
         tbody.appendChild(tr);
     });
