@@ -36,8 +36,8 @@ form.btnSalvar.addEventListener('click', () => {
         dataAdmissao: form.dataAdmissao.value,
         dataCadastro: form.dataCadastro.value
     };
-    (modoEdicao) ?        
-        editarProfessorAPI(professor):
+    (modoEdicao) ?
+        editarProfessorAPI(professor) :
         cadastrarProfessorAPI(professor);
 });
 function cadastrarProfessorAPI(professor) {
@@ -70,7 +70,7 @@ function editarProfessorAPI(professor) {
     })
         .then(response => response.json()) // se funcionar 
         .then(response => {
-        console.log(response)
+            console.log(response)
             toast("Dados atualizados, com sucesso!");
             limparCampos();
             atualizarProfessorNaLista(response);
@@ -103,7 +103,7 @@ function obterProfessoresDaAPI() {
         })
 };
 
-function atualizarProfessorNaLista(professor){
+function atualizarProfessorNaLista(professor) {
     let indice = listaProfessores.findIndex(p => p.id == professor.id);
     listaProfessores.splice(indice, 1, professor);
     preencherTabela(listaProfessores);
@@ -129,7 +129,7 @@ function preencherTabela(professores) {
         tdSalario.textContent = aplicarMascaraMoeda(parseInt(professor.salario));
         tdDataAdmissao.textContent = aplicarMascaraEmDataIso(professor.dataAdmissao);
         tdDataCadastro.textContent = aplicarMascaraEmDataIso(professor.dataCadastro);
-   
+
         // Cria o botão de editar dinamicamente
         tdBtnEditar.setAttribute("type", "button");
         tdBtnEditar.setAttribute("class", "btn btn-outline-primary");
